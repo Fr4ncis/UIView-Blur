@@ -8,122 +8,162 @@
 
 #import "UIView+Blur.h"
 #import <objc/runtime.h>
+#import <QuartzCore/QuartzCore.h>
 #import "UIImage+ImageEffects.h"
 #define maxBlurRadius 20.0f
 #define steps 10
 
-static char BLUR_SNAPSHOT;
+//@interface MyCAAction : CABasicAnimation
+//
+//@end
+//
+//@implementation MyCAAction
+//
+//+ (instancetype)sharedInstance {
+//    static MyCAAction *_sharedInstance = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        _sharedInstance = [MyCAAction new];
+//    });
+//    
+//    return _sharedInstance;
+//}
+//
+//- (void)runActionForKey:(NSString *)event object:(id)anObject arguments:(NSDictionary *)dict
+//{
+//    CABlurLayer *layer = (CABlurLayer*)anObject;
+//    [anObject addAnimation:self forKey:@"blur"];
+//    NSLog(@"runActionForkey: %@ <%@> (an: %.1f) d: %@", event, anObject, layer.blur, dict);
+//}
+//
+//@end
 
-@interface CABlurLayer : CALayer
+@interface CABlurLayer () {
+    NSArray *blurredSnapshots;
+}
 
 @end
 
 @implementation CABlurLayer
+@dynamic blur;
+
+- (void)updateSnapshots
+{
+    [self setOpacity:0];
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
+    [[self superlayer] renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+    [self setOpacity:1];
+    NSMutableArray *array = [NSMutableArray new];
+    for (int i = 0; i <= steps; i++)
+    {
+        UIImage *blurImage = [snapshot applyBlurWithRadius:5*(i*1/(float)steps) tintColor:[UIColor clearColor] saturationDeltaFactor:1 maskImage:nil];
+        [array addObject:blurImage];
+    }
+    blurredSnapshots = array;
+}
+
+//- (void)setBlur:(float)aBlur
+//{
+//    blur = aBlur;
+//    [self setNeedsDisplay];
+//}
+
+- (id)initWithLayer:(id)layer {
+	if ((self = [super initWithLayer:layer])) {
+		self.blur = 0;
+	}
+	return self;
+}
 
 + (BOOL)needsDisplayForKey:(NSString *) key {
-    NSLog(@"key: %@",key);
-    if ([key isEqualToString:@"blur"]) {
+    if ([key isEqualToString:@"blur"])
+    {
         return YES;
     }
     return [super needsDisplayForKey:key];
 }
 
+- (void)drawInContext:(CGContextRef)ctx
+{
+    [super drawInContext:ctx];
+    NSLog(@"drawInContext blur: %.1f", self.blur);
+    if (!blurredSnapshots) [self updateSnapshots];
+    int index = floorf(self.blur*steps);
+    UIImage *blurImage = blurredSnapshots[index];
+    UIGraphicsPushContext(ctx);
+    //CGContextDrawImage(ctx, self.bounds, blurImage.CGImage);
+    [blurImage drawAtPoint:CGPointZero];
+    UIGraphicsPopContext();
+
+}
+
+- (id<CAAction>)actionForKey:(NSString *)event
+{
+    if ([event isEqualToString:@"blur"])
+    {
+        NSLog(@"actionForKey: %@", event);
+        CABasicAnimation *anim = [CABasicAnimation animation];
+        //[anim setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
+        //[anim setFillMode:kCAFillModeForwards];
+        //[anim setFromValue:[NSValue valueWithCGPoint:CGPointMake(0, 0)]];
+        [anim setRemovedOnCompletion:NO];
+        [anim setKeyPath:@"blur"];
+        return anim;
+    }
+    return [super actionForKey:event];
+}
+
+//- (id<CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event
+//{
+//    NSLog(@"actionForLayer: %@ key: %@", layer, event);
+//    if ([event isEqualToString:@"blur"])
+//    {
+//        return [super actionForKey:@"position"];
+//    }
+//    return nil;
+//}
+
 @end
 
-@implementation UIView (Blur)
-
+@implementation UIBlurImageView
+@synthesize blurredLayer;
 @dynamic blur;
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Class class = [self class];
-        
-        // When swizzling a class method, use the following:
-        // Class class = object_getClass((id)self);
-        
-        SEL originalSelector = @selector(drawRect:);
-        SEL swizzledSelector = @selector(otherDrawRect:);
-        
-        Method originalMethod = class_getInstanceMethod(class, originalSelector);
-        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-        
-        BOOL didAddMethod =
-        class_addMethod(class,
-                        originalSelector,
-                        method_getImplementation(swizzledMethod),
-                        method_getTypeEncoding(swizzledMethod));
-        if (didAddMethod) {
-            class_replaceMethod(class,
-                                swizzledSelector,
-                                method_getImplementation(originalMethod),
-                                method_getTypeEncoding(originalMethod));
-        } else {
-            method_exchangeImplementations(originalMethod, swizzledMethod);
-        }
-    });
-}
+//- (CALayer*)blurredLayer
+//{
+//    return (CALayer *)objc_getAssociatedObject(self, &BLUR_LAYER);;
+//}
+//
+//- (void)setBlurredLayer:(CALayer*)layer
+//{
+//    objc_setAssociatedObject(self, &BLUR_LAYER, layer, OBJC_ASSOCIATION_RETAIN);
+//}
 
-- (void)otherDrawRect:(CGRect)rect
+- (void)updateSnapshots
 {
-    [self otherDrawRect:rect];
-    [self updateSnaphots];
-}
-
-- (NSArray*)blurredSnapshots
-{
-    return (NSArray *)objc_getAssociatedObject(self, &BLUR_SNAPSHOT);;
-}
-
-- (void)setBlurredSnapshots:(NSArray*)array
-{
-    objc_setAssociatedObject(self, &BLUR_SNAPSHOT, array, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (UIImage*)snapshot
-{
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
-    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:NO];
-    return UIGraphicsGetImageFromCurrentImageContext();
-}
-
-- (void)updateSnaphots
-{
-    UIImage *snapshot = [self snapshot];
-    NSMutableArray *array = [NSMutableArray new];
-    for (int i = 0; i <= steps; i++)
-    {
-        UIImage *blurImage = [snapshot applyBlurWithRadius:5*(i*1/(float)steps) tintColor:[UIColor clearColor] saturationDeltaFactor:1 maskImage:nil];
-        CABlurLayer *aLayer = [CABlurLayer layer];
-        aLayer.bounds = self.bounds;
-        aLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
-        aLayer.contents = (id)blurImage.CGImage;
-        aLayer.opacity = 0;
-        [self.layer addSublayer:aLayer];
-        [array addObject:aLayer];
-    }
-    [self setBlurredSnapshots:array];
+    [self.blurredLayer updateSnapshots];
 }
 
 - (void)setBlur:(float)blur
 {
-    float value = blur * steps;
-    int floor = floorf(value);
-    if (![self blurredSnapshots]) [self updateSnaphots];
-    [CATransaction begin];
-    [CATransaction setValue: (id) kCFBooleanTrue forKey: kCATransactionDisableActions];
-    for (int i = 0; i <= steps; i++)
+    NSLog(@"setBlur blur: %.1f", blur);
+    
+    if (!self.blurredLayer)
     {
-        CABlurLayer *layer = (CABlurLayer*)[self blurredSnapshots][i];
-        if (floor == i) {
-            [layer setValue:@(0) forKey:@"blur"];
-            layer.opacity = 1;
-        }
-        else {
-            layer.opacity = 0;
-        }
+        self.blurredLayer = [[CABlurLayer alloc] initWithLayer:nil];
+        self.blurredLayer.bounds = self.bounds;
+        self.blurredLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+        [self.layer addSublayer:self.blurredLayer];
     }
-    [CATransaction commit];
+    self.blurredLayer.blur = blur;
+    
+    
+    // DISABLE Animation
+    //[CATransaction begin];
+    //[CATransaction setValue: (id) kCFBooleanTrue forKey: kCATransactionDisableActions];
+    //[CATransaction commit];
+
 }
 
 @end

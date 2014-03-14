@@ -11,7 +11,7 @@
 #import "UIImage+ImageEffects.h"
 
 @interface ViewController ()
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIBlurImageView *imageView;
 
 @end
 
@@ -35,16 +35,44 @@
 }
 
 - (IBAction)animateToBlurZero:(id)sender {
+    NSLog(@"Animating implictly to .blur = 0");
     [UIView animateWithDuration:2.0f animations:^{
         self.imageView.blur = 0;
     }];
 }
 
-- (IBAction)animateToBlurOne:(id)sender {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:2.0f];
-    self.imageView.blur = 1;
-    [UIView commitAnimations];
+- (IBAction)animateToBlurOneNew:(id)sender {
+    NSLog(@"Animating implictly to .blur = 1");
+    [UIView animateWithDuration:2.0f animations:^{
+        self.imageView.blur = 1;
+    }];
 }
 
+- (IBAction)animateToBlurOne:(id)sender {
+    NSLog(@"Animating explictly to .blur = 1");
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"blur"];
+    
+    // Set the initial and the final values
+    [animation setToValue:@(1.0)];
+    
+    // Set duration
+    [animation setDuration:3.0f];
+    
+    // Set animation to be consistent on completion
+    //[animation setRemovedOnCompletion:NO];
+    //[animation setFillMode:kCAFillModeForwards];
+    
+    // Add animation to the view's layer
+    [self.imageView.blurredLayer addAnimation:animation forKey:@"blur"];
+    self.imageView.blurredLayer.blur = 1;
+}
+
+- (IBAction)blurZero:(id)sender {
+    NSLog(@"NOT animating to .blur = 0");
+    self.imageView.blur = 0;
+}
+- (IBAction)blurOne:(id)sender {
+    NSLog(@"NOT animating to .blur = 1");
+    self.imageView.blur = 1;
+}
 @end

@@ -8,11 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (Blur)
+@interface CABlurLayer : CALayer {
+    float blur;
+}
 
 @property (nonatomic, assign) float blur;
 
-- (UIImage*)snapshot;
-- (void)updateSnaphots;
+@end
+
+@interface UIBlurImageView : UIImageView
+
+@property (nonatomic, assign) float blur;
+@property (nonatomic, strong) CABlurLayer *blurredLayer;
+
+- (void)updateSnapshots;
 
 @end
