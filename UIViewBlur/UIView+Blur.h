@@ -13,6 +13,7 @@
 }
 
 @property (nonatomic, assign) float blur;
+@property (nonatomic, strong) NSArray *blurredSnapshots;
 
 @end
 

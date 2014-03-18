@@ -38,14 +38,18 @@
     NSLog(@"Animating implictly to .blur = 0");
     [UIView animateWithDuration:2.0f animations:^{
         self.imageView.blur = 0;
+        NSLog(@"duration: %.1f", [CATransaction animationDuration]);
     }];
 }
 
 - (IBAction)animateToBlurOneNew:(id)sender {
-    NSLog(@"Animating implictly to .blur = 1");
-    [UIView animateWithDuration:2.0f animations:^{
-        self.imageView.blur = 1;
-    }];
+    //NSLog(@"Animating implictly to .blur = 1");
+    //[UIView beginAnimations:nil context:nil];
+    //[UIView setAnimationDuration:2.0];
+    //self.imageView.blurredLayer.borderWidth = 20.0f;
+    self.imageView.blurredLayer.blur = 1;
+    //self.imageView.layer.borderWidth = 20.0f;
+    //[UIView commitAnimations];
 }
 
 - (IBAction)animateToBlurOne:(id)sender {
@@ -53,10 +57,11 @@
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"blur"];
     
     // Set the initial and the final values
+    [animation setFromValue:@(0.0)];
     [animation setToValue:@(1.0)];
     
     // Set duration
-    [animation setDuration:3.0f];
+    [animation setDuration:2.0f];
     
     // Set animation to be consistent on completion
     //[animation setRemovedOnCompletion:NO];
@@ -74,5 +79,8 @@
 - (IBAction)blurOne:(id)sender {
     NSLog(@"NOT animating to .blur = 1");
     self.imageView.blur = 1;
+}
+- (IBAction)updateSnapshots:(id)sender {
+    [self.imageView updateSnapshots];
 }
 @end

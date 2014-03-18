@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D513AF4E18D770940052DB52 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D513AF4B18D770940052DB52 /* UIImage+ImageEffects.m */; };
+		D513AF4F18D770940052DB52 /* UIView+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = D513AF4D18D770940052DB52 /* UIView+Blur.m */; };
 		D53BD61218CF2AFB0047A27B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53BD61118CF2AFB0047A27B /* Foundation.framework */; };
 		D53BD61418CF2AFB0047A27B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53BD61318CF2AFB0047A27B /* CoreGraphics.framework */; };
 		D53BD61618CF2AFB0047A27B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53BD61518CF2AFB0047A27B /* UIKit.framework */; };
@@ -21,9 +23,7 @@
 		D53BD63318CF2AFB0047A27B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53BD61518CF2AFB0047A27B /* UIKit.framework */; };
 		D53BD63B18CF2AFB0047A27B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D53BD63918CF2AFB0047A27B /* InfoPlist.strings */; };
 		D53BD63D18CF2AFB0047A27B /* UIViewBlurDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D53BD63C18CF2AFB0047A27B /* UIViewBlurDemoTests.m */; };
-		D53BD64918CF2B220047A27B /* UIView+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = D53BD64818CF2B220047A27B /* UIView+Blur.m */; };
 		D53BD64C18CF2BCB0047A27B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = D53BD64B18CF2BCB0047A27B /* BlurView.m */; };
-		D53BD65218CF322B0047A27B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D53BD65118CF322B0047A27B /* UIImage+ImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D513AF4A18D770940052DB52 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		D513AF4B18D770940052DB52 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		D513AF4C18D770940052DB52 /* UIView+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Blur.h"; sourceTree = "<group>"; };
+		D513AF4D18D770940052DB52 /* UIView+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Blur.m"; sourceTree = "<group>"; };
 		D53BD60E18CF2AFB0047A27B /* UIViewBlurDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIViewBlurDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D53BD61118CF2AFB0047A27B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D53BD61318CF2AFB0047A27B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -56,12 +60,8 @@
 		D53BD63818CF2AFB0047A27B /* UIViewBlurDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIViewBlurDemoTests-Info.plist"; sourceTree = "<group>"; };
 		D53BD63A18CF2AFB0047A27B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D53BD63C18CF2AFB0047A27B /* UIViewBlurDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewBlurDemoTests.m; sourceTree = "<group>"; };
-		D53BD64718CF2B220047A27B /* UIView+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Blur.h"; sourceTree = "<group>"; };
-		D53BD64818CF2B220047A27B /* UIView+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Blur.m"; sourceTree = "<group>"; };
 		D53BD64A18CF2BCB0047A27B /* BlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurView.h; sourceTree = "<group>"; };
 		D53BD64B18CF2BCB0047A27B /* BlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurView.m; sourceTree = "<group>"; };
-		D53BD65018CF322B0047A27B /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		D53BD65118CF322B0047A27B /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +88,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D513AF4918D770940052DB52 /* UIViewBlur */ = {
+			isa = PBXGroup;
+			children = (
+				D513AF4A18D770940052DB52 /* UIImage+ImageEffects.h */,
+				D513AF4B18D770940052DB52 /* UIImage+ImageEffects.m */,
+				D513AF4C18D770940052DB52 /* UIView+Blur.h */,
+				D513AF4D18D770940052DB52 /* UIView+Blur.m */,
+			);
+			path = UIViewBlur;
+			sourceTree = SOURCE_ROOT;
+		};
 		D53BD60518CF2AFB0047A27B = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +132,7 @@
 		D53BD61718CF2AFB0047A27B /* UIViewBlurDemo */ = {
 			isa = PBXGroup;
 			children = (
-				D53BD64618CF2B160047A27B /* UIViewBlur */,
+				D513AF4918D770940052DB52 /* UIViewBlur */,
 				D53BD62018CF2AFB0047A27B /* AppDelegate.h */,
 				D53BD62118CF2AFB0047A27B /* AppDelegate.m */,
 				D53BD62318CF2AFB0047A27B /* Main.storyboard */,
@@ -162,17 +173,6 @@
 				D53BD63918CF2AFB0047A27B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D53BD64618CF2B160047A27B /* UIViewBlur */ = {
-			isa = PBXGroup;
-			children = (
-				D53BD65018CF322B0047A27B /* UIImage+ImageEffects.h */,
-				D53BD65118CF322B0047A27B /* UIImage+ImageEffects.m */,
-				D53BD64718CF2B220047A27B /* UIView+Blur.h */,
-				D53BD64818CF2B220047A27B /* UIView+Blur.m */,
-			);
-			path = UIViewBlur;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,9 +273,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D53BD62818CF2AFB0047A27B /* ViewController.m in Sources */,
-				D53BD64918CF2B220047A27B /* UIView+Blur.m in Sources */,
-				D53BD65218CF322B0047A27B /* UIImage+ImageEffects.m in Sources */,
+				D513AF4E18D770940052DB52 /* UIImage+ImageEffects.m in Sources */,
 				D53BD64C18CF2BCB0047A27B /* BlurView.m in Sources */,
+				D513AF4F18D770940052DB52 /* UIView+Blur.m in Sources */,
 				D53BD62218CF2AFB0047A27B /* AppDelegate.m in Sources */,
 				D53BD61E18CF2AFB0047A27B /* main.m in Sources */,
 			);
@@ -486,6 +486,7 @@
 				D53BD64218CF2AFB0047A27B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D53BD64318CF2AFB0047A27B /* Build configuration list for PBXNativeTarget "UIViewBlurDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +495,7 @@
 				D53BD64518CF2AFB0047A27B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
