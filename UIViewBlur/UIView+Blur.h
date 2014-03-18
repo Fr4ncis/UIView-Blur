@@ -17,7 +17,7 @@
 
 @end
 
-@interface UIBlurImageView : UIImageView
+@interface UIView (Blur)
 
 @property (nonatomic, assign) float blur;
 @property (nonatomic, strong) CABlurLayer *blurredLayer;

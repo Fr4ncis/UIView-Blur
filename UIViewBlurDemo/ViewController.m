@@ -11,7 +11,7 @@
 #import "UIImage+ImageEffects.h"
 
 @interface ViewController ()
-@property (strong, nonatomic) IBOutlet UIBlurImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIView *imageView;
 
 @end
 
@@ -35,7 +35,7 @@
 }
 
 - (IBAction)animateToBlurZero:(id)sender {
-    NSLog(@"Animating implictly to .blur = 0");
+    NSLog(@"Animating (UIView) to .blur = 0");
     [UIView animateWithDuration:2.0f animations:^{
         self.imageView.blur = 0;
         NSLog(@"duration: %.1f", [CATransaction animationDuration]);
@@ -43,17 +43,15 @@
 }
 
 - (IBAction)animateToBlurOneNew:(id)sender {
-    //NSLog(@"Animating implictly to .blur = 1");
-    //[UIView beginAnimations:nil context:nil];
-    //[UIView setAnimationDuration:2.0];
-    //self.imageView.blurredLayer.borderWidth = 20.0f;
+    NSLog(@"Animating (UIView) to .blur = 1");
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:2.0];
     self.imageView.blurredLayer.blur = 1;
-    //self.imageView.layer.borderWidth = 20.0f;
-    //[UIView commitAnimations];
+    [UIView commitAnimations];
 }
 
 - (IBAction)animateToBlurOne:(id)sender {
-    NSLog(@"Animating explictly to .blur = 1");
+    NSLog(@"Animating explictly (CAAnimation) to .blur = 1");
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"blur"];
     
     // Set the initial and the final values
@@ -63,13 +61,13 @@
     // Set duration
     [animation setDuration:2.0f];
     
-    // Set animation to be consistent on completion
+    // Set animation to be consistent on completion (NO! THIS IS THE WRONG WAY TO DO IT!!!)
     //[animation setRemovedOnCompletion:NO];
     //[animation setFillMode:kCAFillModeForwards];
     
     // Add animation to the view's layer
     [self.imageView.blurredLayer addAnimation:animation forKey:@"blur"];
-    self.imageView.blurredLayer.blur = 1;
+    self.imageView.blurredLayer.blur = 1; // THIS IS THE RIGHT WAY TO MAKE AN ANIMATION CONSISTENT AT THE END
 }
 
 - (IBAction)blurZero:(id)sender {
