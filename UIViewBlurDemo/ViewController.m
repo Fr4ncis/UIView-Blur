@@ -35,6 +35,8 @@
 }
 
 - (IBAction)animateToBlurZero:(id)sender {
+    // THIS IS NOT WORKING
+    // did not find a way to get this working (implicit animation inside a UIView animation
     NSLog(@"Animating (UIView) to .blur = 0");
     [UIView animateWithDuration:2.0f animations:^{
         self.imageView.blur = 0;
@@ -43,14 +45,19 @@
 }
 
 - (IBAction)animateToBlurOneNew:(id)sender {
+    // THIS IS NOT WORKING
+    // did not find a way to get this working (implicit animation inside a UIView animation
     NSLog(@"Animating (UIView) to .blur = 1");
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:2.0];
-    self.imageView.blurredLayer.blur = 1;
+    self.imageView.blur = 1;
     [UIView commitAnimations];
 }
 
 - (IBAction)animateToBlurOne:(id)sender {
+    // adds the blurred layer to the image
+    self.imageView.blur = 0;
+    
     NSLog(@"Animating explictly (CAAnimation) to .blur = 1");
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"blur"];
     
@@ -61,13 +68,15 @@
     // Set duration
     [animation setDuration:2.0f];
     
-    // Set animation to be consistent on completion (NO! THIS IS THE WRONG WAY TO DO IT!!!)
-    //[animation setRemovedOnCompletion:NO];
-    //[animation setFillMode:kCAFillModeForwards];
+    // Set animation to be consistent on completion
+    // (NO! THIS IS THE WRONG WAY TO DO IT!!!)
+    // [animation setRemovedOnCompletion:NO];
+    // [animation setFillMode:kCAFillModeForwards];
     
     // Add animation to the view's layer
     [self.imageView.blurredLayer addAnimation:animation forKey:@"blur"];
-    self.imageView.blurredLayer.blur = 1; // THIS IS THE RIGHT WAY TO MAKE AN ANIMATION CONSISTENT AT THE END
+    // THIS IS THE RIGHT WAY TO MAKE AN ANIMATION CONSISTENT AT THE END
+    self.imageView.blurredLayer.blur = 1;
 }
 
 - (IBAction)blurZero:(id)sender {
