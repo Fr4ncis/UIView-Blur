@@ -11,7 +11,7 @@ UIView+Blur can be installed by copying the files inside the *UIViewBlur* direct
 
 There is also a *UIViewBlur.podspec* **podspec file** you can easily add UIView+Blur to your project adding this line to your Podfile:
 
-	pod "UIViewBlur", :podspec => "https://raw.github.com/Fr4ncis/UIViewBlur/master/UIViewBlur.podspec"
+	pod "UIViewBlur", :podspec => "https://raw.github.com/Fr4ncis/UIView-Blur/master/UIViewBlur.podspec"
 	
 We will soon fully support Cocoapods to provide an even easier method to integrate it in your project.
 
