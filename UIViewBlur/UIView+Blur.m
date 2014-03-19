@@ -13,6 +13,7 @@
 #define maxBlurRadius 20.0f
 #define steps 20
 #define asyncBlur YES
+#define implicitAnimationsDisabled NO
 
 static NSString* BLUR_LAYER;
 
@@ -27,7 +28,6 @@ static NSString* BLUR_LAYER;
 
 - (void)updateSnapshots
 {
-    NSDate *start = [NSDate date];
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
     [[self superlayer] renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
@@ -60,8 +60,6 @@ static NSString* BLUR_LAYER;
     {
         blurBlock();
     }
-    NSDate *end = [NSDate date];
-    NSLog(@"Time: %.3f", [end timeIntervalSinceDate:start]);
 }
 
 
@@ -110,11 +108,10 @@ static NSString* BLUR_LAYER;
 {
     if ([event isEqualToString:@"blur"])
     {
-        return nil;
-        NSLog(@"an: %@", self.actions);
+        if (implicitAnimationsDisabled) return nil;
         CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"blur"];
         [anim setFromValue:@([self.presentationLayer blur])];
-        [anim setDuration:1.0f];
+        [anim setDuration:1.5f];
         [anim setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
         [anim setKeyPath:@"blur"];
         return anim;
@@ -149,9 +146,7 @@ static NSString* BLUR_LAYER;
 }
 
 - (void)setBlur:(float)blur
-{
-    //NSLog(@"setBlur blur: %.1f", blur);
-    
+{    
     if (!self.blurredLayer)
     {
         self.blurredLayer = [[CABlurLayer alloc] initWithLayer:nil];

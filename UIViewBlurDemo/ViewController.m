@@ -45,13 +45,10 @@
 }
 
 - (IBAction)animateToBlurOneNew:(id)sender {
-    // THIS IS NOT WORKING
-    // did not find a way to get this working (implicit animation inside a UIView animation
+    // IMPLICIT ANIMTION
     NSLog(@"Animating (UIView) to .blur = 1");
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:2.0];
-    self.imageView.blur = 1;
-    [UIView commitAnimations];
+    self.imageView.blur = 0;
+    self.imageView.blurredLayer.blur = 1;
 }
 
 - (IBAction)animateToBlurOne:(id)sender {

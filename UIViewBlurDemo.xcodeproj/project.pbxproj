@@ -23,7 +23,6 @@
 		D53BD63318CF2AFB0047A27B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53BD61518CF2AFB0047A27B /* UIKit.framework */; };
 		D53BD63B18CF2AFB0047A27B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D53BD63918CF2AFB0047A27B /* InfoPlist.strings */; };
 		D53BD63D18CF2AFB0047A27B /* UIViewBlurDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D53BD63C18CF2AFB0047A27B /* UIViewBlurDemoTests.m */; };
-		D53BD64C18CF2BCB0047A27B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = D53BD64B18CF2BCB0047A27B /* BlurView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,8 +59,6 @@
 		D53BD63818CF2AFB0047A27B /* UIViewBlurDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIViewBlurDemoTests-Info.plist"; sourceTree = "<group>"; };
 		D53BD63A18CF2AFB0047A27B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D53BD63C18CF2AFB0047A27B /* UIViewBlurDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewBlurDemoTests.m; sourceTree = "<group>"; };
-		D53BD64A18CF2BCB0047A27B /* BlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurView.h; sourceTree = "<group>"; };
-		D53BD64B18CF2BCB0047A27B /* BlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,8 +137,6 @@
 				D53BD62718CF2AFB0047A27B /* ViewController.m */,
 				D53BD62918CF2AFB0047A27B /* Images.xcassets */,
 				D53BD61818CF2AFB0047A27B /* Supporting Files */,
-				D53BD64A18CF2BCB0047A27B /* BlurView.h */,
-				D53BD64B18CF2BCB0047A27B /* BlurView.m */,
 			);
 			path = UIViewBlurDemo;
 			sourceTree = "<group>";
@@ -274,7 +269,6 @@
 			files = (
 				D53BD62818CF2AFB0047A27B /* ViewController.m in Sources */,
 				D513AF4E18D770940052DB52 /* UIImage+ImageEffects.m in Sources */,
-				D53BD64C18CF2BCB0047A27B /* BlurView.m in Sources */,
 				D513AF4F18D770940052DB52 /* UIView+Blur.m in Sources */,
 				D53BD62218CF2AFB0047A27B /* AppDelegate.m in Sources */,
 				D53BD61E18CF2AFB0047A27B /* main.m in Sources */,
