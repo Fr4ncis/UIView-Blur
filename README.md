@@ -1,5 +1,11 @@
 UIView+Blur
 ===========
+
+> **Archived, no longer maintained (September 2026).**
+> This 2014 Objective-C category targets iOS 7 and needs its deployment target raised to build with current Xcode.
+> For blur today, use `UIVisualEffectView` in UIKit, or the `.blur(radius:)` modifier and materials in SwiftUI:
+> they are live, GPU-backed and far cheaper than the pre-rendered snapshots used here.
+
 ![image](Assets/blur-video.gif)
 
 A UIView category to blur a view.
